@@ -127,7 +127,7 @@ def xls_load(**kwargs):
     logging.info('Saved data to {}'.format(result_file_path))
 
 
-def spreadsheet_open(workbook_name):
+def google_spreadsheet_open(workbook_name):
     """
     Authorize google client and open spreadsheet
 
@@ -182,7 +182,7 @@ def gsheet_load(**kwargs):
     data = data.astype(str)
 
     workbook_name = options.target.split('!')[0]
-    workbook = spreadsheet_open(workbook_name)
+    workbook = google_spreadsheet_open(workbook_name)
 
     # If exact sheet name was not set
     # then data_block_name will be selected as target sheet name
@@ -208,7 +208,7 @@ def gsheet_extract(**kwargs):
     """
     workbook_name = kwargs.get('workbook')
     sheet_name = kwargs.get('sheet')
-    workbook = spreadsheet_open(workbook_name)
+    workbook = google_spreadsheet_open(workbook_name)
     sheet = workbook.worksheet_by_title(sheet_name)
     result = sheet.get_as_df()
     logging.info(dataframe_size_info_msg(result))
